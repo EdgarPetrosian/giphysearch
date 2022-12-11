@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ImageItem from '../components/ImageItem';
 import LoadingSpinner from '../components/LoadingSpinner';
-import getGifsData from '../services/getGifsData';
+import { getGiphsDataApi } from '../services/getGifsData';
 import { IImageItem } from "../types";
 import useDebounce from "../hooks/useDebounce";
 
@@ -15,8 +15,10 @@ const Search = () => {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const giphObject = await getGifsData(debouncedSearch);
-      setGipgsData(giphObject)
+      const data = await getGiphsDataApi({
+        query: search,
+      });
+      setGipgsData(data)
       setLoading(false);
     }
     if (debouncedSearch) fetchData();

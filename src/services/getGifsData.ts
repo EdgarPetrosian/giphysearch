@@ -1,17 +1,20 @@
-import React from 'react';
-import axios from 'axios';
+import { getInstance } from './client';
+const params = {
+  api_key: "0qc40Qx0l2GXQVvCxMDxrpNAV2qtmMmp",
+  limit: 25,
+  offset: 0,
+  rating: 'pg',
+  lang: 'en',
+}
 // Requesting GIFs data by search query
-const getGifsData = async (query: React.SetStateAction<string | null>) => { 
-  try {
-    const {data:res} = await axios.get( `https://api.giphy.com/v1/gifs/search?api_key=0qc40Qx0l2GXQVvCxMDxrpNAV2qtmMmp&q=${query}&limit=25&offset=0&rating=pg&lang=en`,);
-    const {meta, data} = res;
-    if (meta?.status === 200) {
-      return data;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return [];
+export const getGiphsDataApi = function (param) {
+  params.q = param.query
+  const cl = getInstance();
+  //NOTE: search query
+  return cl.get('search', { params });
 };
-
-export default getGifsData;
+// Requesting GIFs data randomly
+export const getGiphsRandomDataApi = function () {
+  const cl = getInstance();
+  return cl.get('random', { params });
+};
