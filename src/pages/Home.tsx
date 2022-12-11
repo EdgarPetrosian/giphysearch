@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import ImageItem from '../components/ImageItem';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { getRandomGiphy } from '../services/getRandomGiphy';
+import { getGiphsRandomDataApi } from '../services/getGifsData'
 
 const Home = () => {
   const [giphyUrl, setGipgyUrl] = useState<string>('');
   const [loading, setLoading] = useState(false)
   const ref = useRef(true);
-  const useFirstRender = ()=> {
+  const useFirstRender = () => {
     const firstRender = ref.current;
     ref.current = false;
     return firstRender;
@@ -18,14 +18,14 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const urlObject = await getRandomGiphy();
-      setGipgyUrl(urlObject.url)
+      const data = await getGiphsRandomDataApi();
+      setGipgyUrl(data.images.original.url || '')
       setLoading(false);
     }
     const interval = setInterval(() => {
       fetchData();
     }, 15000);
-    if(isFocused){
+    if (isFocused) {
       fetchData();
     }
     return () => clearInterval(interval);
@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <div className="App">
-      {loading ? <LoadingSpinner /> : <ImageItem key={giphyUrl} url={giphyUrl} width={"1000px"} height={"500px"}/>}
+      {loading ? <LoadingSpinner /> : <ImageItem key={giphyUrl} url={giphyUrl} width={"1000px"} height={"500px"} />}
     </div>
   );
 }
