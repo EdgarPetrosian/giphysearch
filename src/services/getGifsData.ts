@@ -1,3 +1,4 @@
+import { TFetchParams } from '../types';
 import { getInstance } from './client';
 const params = {
   api_key: "0qc40Qx0l2GXQVvCxMDxrpNAV2qtmMmp",
@@ -7,7 +8,7 @@ const params = {
   lang: 'en',
 }
 // Requesting GIFs data by search query
-export const getGiphsDataApi = function (param) {
+export const getGiphsDataApi = function (param): TFetchParams {
   params.q = param.query
   const cl = getInstance();
   //NOTE: search query

@@ -5,3 +5,7 @@ export interface IImageItem {
   height: number | string;
   hash: string;
 };
+
+export type TFetchParams = {
+  query: string
+}
