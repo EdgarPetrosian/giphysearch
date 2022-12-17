@@ -2,8 +2,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import Header from './components/Header';
 
@@ -17,7 +16,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-       <Header/>
+        <Header />
         <Routes>
           <Route exact path='/home' element={<Home />}></Route>
           <Route exact path='/search' element={<Search />}></Route>
