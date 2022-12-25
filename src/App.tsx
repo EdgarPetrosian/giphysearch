@@ -11,6 +11,7 @@ import Search from './pages/Search';
 
 import './Styles/App.css';
 import './Styles/search.css';
+import './Styles/nav.css';
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route exact path='/home' element={<Home />}></Route>
-          <Route exact path='/search' element={<Search />}></Route>
+          <Route path='/home' element={<Home/>}/>
+          <Route path='/search' element={<Search/>}/>
         </Routes>
       </div>
     </Router>

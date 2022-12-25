@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import ImageItem from '../components/ImageItem';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { getGiphsRandomDataApi } from '../services/getGifsData'
+import { getGifsRandomDataApi } from '../services/getGifsData'
 
 const Home = () => {
   const [giphyUrl, setGipgyUrl] = useState<string>('');
@@ -18,8 +18,9 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const data = await getGiphsRandomDataApi();
-      setGipgyUrl(data.images.original.url || '')
+      // @ts-ignore
+      const {images} = await getGifsRandomDataApi();
+      setGipgyUrl(images.original.url || '')
       setLoading(false);
     }
     const interval = setInterval(() => {
