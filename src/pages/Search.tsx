@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import ImageItem from '../components/ImageItem';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { getGiphsDataApi } from '../services/getGifsData';
-import { IImageItem } from "../types";
+import { getGifsDataApi } from '../services/getGifsData';
 import useDebounce from "../hooks/useDebounce";
 
 const Search = () => {
@@ -15,16 +14,18 @@ const Search = () => {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const data = await getGiphsDataApi({
+      const data = await getGifsDataApi({
         query: search,
       });
+      // @ts-ignore
       setGipgsData(data)
       setLoading(false);
     }
     if (debouncedSearch) fetchData();
   }, [debouncedSearch])
 
-  const listItems = giphsData.map((data): IImageItem => <ImageItem key={data.images.original.hash} url={data.images.original.url} width={"500px"} height={"300px"} />)
+  // @ts-ignore
+  const listItems = giphsData.map((data): JSX.Element => <ImageItem key={data.images.original.hash} url={data.images.original.url} width={"500px"} height={"300px"} />)
 
   return (
     <div className={"container"}>
